@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://Server/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="GenerickiKontrolerServer" targetNamespace="http://Server/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://Server/" elementFormDefault="unqualified" targetNamespace="http://Server/" version="1.0">
+
+  <xs:element name="hello" type="tns:hello"/>
+
+  <xs:element name="helloResponse" type="tns:helloResponse"/>
+
+  <xs:element name="mojaDrugaMetoda" type="tns:mojaDrugaMetoda"/>
+
+  <xs:element name="mojaDrugaMetodaResponse" type="tns:mojaDrugaMetodaResponse"/>
+
+  <xs:element name="mojaMetoda" type="tns:mojaMetoda"/>
+
+  <xs:element name="mojaMetodaResponse" type="tns:mojaMetodaResponse"/>
+
+  <xs:complexType name="mojaMetoda">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="mojaMetodaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="hello">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="helloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="mojaDrugaMetoda">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="mojaDrugaMetodaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="mojaMetodaResponse">
+    <wsdl:part element="tns:mojaMetodaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="helloResponse">
+    <wsdl:part element="tns:helloResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="mojaMetoda">
+    <wsdl:part element="tns:mojaMetoda" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hello">
+    <wsdl:part element="tns:hello" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="mojaDrugaMetoda">
+    <wsdl:part element="tns:mojaDrugaMetoda" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="mojaDrugaMetodaResponse">
+    <wsdl:part element="tns:mojaDrugaMetodaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="GenerickiKontrolerServer">
+    <wsdl:operation name="mojaMetoda">
+      <wsdl:input message="tns:mojaMetoda" name="mojaMetoda">
+    </wsdl:input>
+      <wsdl:output message="tns:mojaMetodaResponse" name="mojaMetodaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <wsdl:input message="tns:hello" name="hello">
+    </wsdl:input>
+      <wsdl:output message="tns:helloResponse" name="helloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mojaDrugaMetoda">
+      <wsdl:input message="tns:mojaDrugaMetoda" name="mojaDrugaMetoda">
+    </wsdl:input>
+      <wsdl:output message="tns:mojaDrugaMetodaResponse" name="mojaDrugaMetodaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GenerickiKontrolerServerSoapBinding" type="tns:GenerickiKontrolerServer">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="mojaMetoda">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="mojaMetoda">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="mojaMetodaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="hello">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="helloResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mojaDrugaMetoda">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="mojaDrugaMetoda">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="mojaDrugaMetodaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GenerickiKontrolerServer">
+    <wsdl:port binding="tns:GenerickiKontrolerServerSoapBinding" name="GenerickiKontrolerServerPort">
+      <soap:address location="http://localhost:8080/VideoSlotWebServer/GenerickiKontrolerServer"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

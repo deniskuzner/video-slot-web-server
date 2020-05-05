@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://Server/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ServerController" targetNamespace="http://Server/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://Server/" elementFormDefault="unqualified" targetNamespace="http://Server/" version="1.0">
+
+  <xs:element name="getPositions" type="tns:getPositions"/>
+
+  <xs:element name="getPositionsResponse" type="tns:getPositionsResponse"/>
+
+  <xs:element name="getSymbols" type="tns:getSymbols"/>
+
+  <xs:element name="getSymbolsResponse" type="tns:getSymbolsResponse"/>
+
+  <xs:element name="saveSPositions" type="tns:saveSPositions"/>
+
+  <xs:element name="saveSPositionsResponse" type="tns:saveSPositionsResponse"/>
+
+  <xs:complexType name="getSymbols">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:webServerTransferObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="webServerTransferObject">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="symbols" nillable="true" type="tns:symbol"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="positions" nillable="true" type="tns:position"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="sPositions" nillable="true" type="tns:sPosition"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+      <xs:element name="signal" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="symbol">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="position">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element name="x" type="xs:int"/>
+      <xs:element name="y" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sPosition">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element name="positionId" type="xs:int"/>
+      <xs:element name="spinId" type="xs:int"/>
+      <xs:element name="symbolId" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getSymbolsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:webServerTransferObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="saveSPositions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:webServerTransferObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="saveSPositionsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:webServerTransferObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPositions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:webServerTransferObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPositionsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:webServerTransferObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getSymbols">
+    <wsdl:part element="tns:getSymbols" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPositionsResponse">
+    <wsdl:part element="tns:getPositionsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveSPositions">
+    <wsdl:part element="tns:saveSPositions" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSymbolsResponse">
+    <wsdl:part element="tns:getSymbolsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveSPositionsResponse">
+    <wsdl:part element="tns:saveSPositionsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPositions">
+    <wsdl:part element="tns:getPositions" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ServerController">
+    <wsdl:operation name="getSymbols">
+      <wsdl:input message="tns:getSymbols" name="getSymbols">
+    </wsdl:input>
+      <wsdl:output message="tns:getSymbolsResponse" name="getSymbolsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveSPositions">
+      <wsdl:input message="tns:saveSPositions" name="saveSPositions">
+    </wsdl:input>
+      <wsdl:output message="tns:saveSPositionsResponse" name="saveSPositionsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPositions">
+      <wsdl:input message="tns:getPositions" name="getPositions">
+    </wsdl:input>
+      <wsdl:output message="tns:getPositionsResponse" name="getPositionsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServerControllerSoapBinding" type="tns:ServerController">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getSymbols">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getSymbols">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSymbolsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveSPositions">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveSPositions">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveSPositionsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPositions">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getPositions">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPositionsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServerController">
+    <wsdl:port binding="tns:ServerControllerSoapBinding" name="ServerControllerPort">
+      <soap:address location="http://localhost:8080/VideoSlotWebServer/ServerController"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

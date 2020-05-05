@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/VideoSlotWebServer/GenericServerController?wsdl" uri="src/conf/xml-resources/web-service-references/GenericServerController/wsdl/localhost_8080/VideoSlotWebServer/GenericServerController.wsdl"/>
+    <system systemId="http://localhost:8080/VideoSlotWebServer/GenerickiKontrolerServer?wsdl" uri="src/conf/xml-resources/web-service-references/GenerickiKontrolerServer/wsdl/localhost_8080/VideoSlotWebServer/GenerickiKontrolerServer.wsdl"/>
+    <system systemId="http://localhost:8080/VideoSlotWebServer/ServerController?wsdl" uri="src/conf/xml-resources/web-service-references/ServerController/wsdl/localhost_8080/VideoSlotWebServer/ServerController.wsdl"/>
+</catalog>

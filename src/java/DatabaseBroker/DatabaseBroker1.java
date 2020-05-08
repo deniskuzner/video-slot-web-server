@@ -8,6 +8,7 @@ package DatabaseBroker;
 import Domain.GeneralEntity;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,6 +44,41 @@ public class DatabaseBroker1 extends DatabaseBroker {
     public boolean insertRecord(GeneralEntity generalEntity) {
         String query = "INSERT INTO " + generalEntity.getClassName() + " VALUES (" + generalEntity.getAtrValue() + ")";
         return executeUpdate(query);
+    }
+
+    @Override
+    public boolean insertCompositeRecord(GeneralEntity generalEntity) {
+        String query = "INSERT INTO " + generalEntity.getClassName() + " VALUES (" + generalEntity.getAtrValue() + ")";
+
+        Statement st = null;
+        boolean signal = false;
+        try {
+            st = connection.prepareStatement(query);
+            st.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rsKeys = st.getGeneratedKeys();
+            int id = 0;
+            if (rsKeys.next()) {
+                id = rsKeys.getInt(1);
+                generalEntity.setPrimaryKey(id);
+                signal = true;
+            }
+
+            List<List<GeneralEntity>> lists = generalEntity.getLists();
+            for (List<GeneralEntity> list : lists) {
+                for (GeneralEntity ge : list) {
+                    ge.setPrimaryKey(id);
+                    query = "INSERT INTO " + ge.getClassName() + " VALUES (" + ge.getAtrValue() + ")";
+                    if(!executeUpdate(query))
+                        signal = false;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseBroker1.class.getName()).log(Level.SEVERE, null, ex);
+            signal = false;
+        } finally {
+            close(null, st, null);
+        }
+        return signal;
     }
 
     @Override

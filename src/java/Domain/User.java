@@ -8,6 +8,7 @@ package Domain;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -133,6 +134,16 @@ public class User implements GeneralEntity {
     @Override
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
         return new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getDate("birthDate"), rs.getInt("balance"));
+    }
+
+    @Override
+    public List<List<GeneralEntity>> getLists() {
+        return null;
+    }
+
+    @Override
+    public void setPrimaryKey(int id) {
+        this.id = id;
     }
 
 }

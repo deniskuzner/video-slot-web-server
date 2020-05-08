@@ -17,6 +17,7 @@ public abstract class DatabaseBroker {
 
     public abstract boolean makeConnection();
     public abstract boolean insertRecord(GeneralEntity generalEntity);
+    public abstract boolean insertCompositeRecord(GeneralEntity generalEntity);
     public abstract boolean updateRecord(GeneralEntity generalEntity, GeneralEntity generalEntityId);
     public abstract boolean updateRecord(GeneralEntity generalEntity);
     public abstract boolean deleteRecord(GeneralEntity generalEntity);

@@ -7,6 +7,7 @@ package Domain;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -85,6 +86,16 @@ public class Position implements GeneralEntity {
     @Override
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
         return new Position(rs.getInt("id"), rs.getInt("x"), rs.getInt("y"));
+    }
+
+    @Override
+    public List<List<GeneralEntity>> getLists() {
+        return null;
+    }
+
+    @Override
+    public void setPrimaryKey(int id) {
+        this.id = id;
     }
 
 }

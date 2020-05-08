@@ -5,10 +5,14 @@
  */
 package Server;
 
+import SO.CreateSpinSO;
+import SO.GetLinePayoutsSO;
 import SO.GetPositionsSO;
 import SO.GetSymbolsSO;
 import SO.SaveSPositionsSO;
+import SO.UpdateUserSO;
 import Transfer.WebServerTransferObject;
+import VideoSlotLogic.VideoSlotLogic;
 import javax.jws.WebService;
 
 /**
@@ -22,14 +26,34 @@ public class ServerController {
         new GetSymbolsSO().getSymbolsSO(transferObject);
         return transferObject;
     }
-    
+
     public WebServerTransferObject getPositions(WebServerTransferObject transferObject) {
         new GetPositionsSO().getPositionsSO(transferObject);
         return transferObject;
     }
-    
+
+    public WebServerTransferObject getLinePayouts(WebServerTransferObject transferObject) {
+        new GetLinePayoutsSO().getLinePayoutsSO(transferObject);
+        return transferObject;
+    }
+
+    public WebServerTransferObject randomizeMathValues(WebServerTransferObject transferObject) {
+        new VideoSlotLogic(transferObject).randomizeMatValues();
+        return transferObject;
+    }
+
     public WebServerTransferObject saveSPositions(WebServerTransferObject transferObject) {
         new SaveSPositionsSO().saveSPositionsSO(transferObject);
+        return transferObject;
+    }
+
+    public WebServerTransferObject updateUser(WebServerTransferObject transferObject) {
+        new UpdateUserSO().updateUserSO(transferObject);
+        return transferObject;
+    }
+
+    public WebServerTransferObject createSpin(WebServerTransferObject transferObject) {
+        new CreateSpinSO().createSpinSO(transferObject);
         return transferObject;
     }
     

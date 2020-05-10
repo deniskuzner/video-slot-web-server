@@ -5,8 +5,6 @@
  */
 package Server;
 
-import Server_client.ServerController;
-import Server_client.WebServerTransferObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,7 +22,7 @@ import javax.xml.namespace.QName;
 @Path("servercontrollerport")
 public class ServerControllerPort {
 
-    private ServerController port;
+    private Server_client.ServerController port;
 
     @Context
     private UriInfo context;
@@ -45,7 +43,7 @@ public class ServerControllerPort {
     @Produces("application/xml")
     @Consumes("application/xml")
     @Path("getsymbols/")
-    public JAXBElement<WebServerTransferObject> postGetSymbols(JAXBElement<WebServerTransferObject> arg0) {
+    public JAXBElement<Server_client.WebServerTransferObject> postGetSymbols(JAXBElement<Server_client.WebServerTransferObject> arg0) {
         try {
             // Call Web Service Operation
             if (port != null) {
@@ -67,33 +65,11 @@ public class ServerControllerPort {
     @Produces("application/xml")
     @Consumes("application/xml")
     @Path("getlinepayouts/")
-    public JAXBElement<WebServerTransferObject> postGetLinePayouts(JAXBElement<WebServerTransferObject> arg0) {
+    public JAXBElement<Server_client.WebServerTransferObject> postGetLinePayouts(JAXBElement<Server_client.WebServerTransferObject> arg0) {
         try {
             // Call Web Service Operation
             if (port != null) {
                 Server_client.WebServerTransferObject result = port.getLinePayouts(arg0.getValue());
-                return new JAXBElement<Server_client.WebServerTransferObject>(new QName("http//Server_client/", "webservertransferobject"), Server_client.WebServerTransferObject.class, result);
-            }
-        } catch (Exception ex) {
-            // TODO handle custom exceptions here
-        }
-        return null;
-    }
-
-    /**
-     * Invokes the SOAP method saveSPositions
-     * @param arg0 resource URI parameter
-     * @return an instance of javax.xml.bind.JAXBElement<Server_client.WebServerTransferObject>
-     */
-    @POST
-    @Produces("application/xml")
-    @Consumes("application/xml")
-    @Path("savespositions/")
-    public JAXBElement<WebServerTransferObject> postSaveSPositions(JAXBElement<WebServerTransferObject> arg0) {
-        try {
-            // Call Web Service Operation
-            if (port != null) {
-                Server_client.WebServerTransferObject result = port.saveSPositions(arg0.getValue());
                 return new JAXBElement<Server_client.WebServerTransferObject>(new QName("http//Server_client/", "webservertransferobject"), Server_client.WebServerTransferObject.class, result);
             }
         } catch (Exception ex) {
@@ -111,7 +87,7 @@ public class ServerControllerPort {
     @Produces("application/xml")
     @Consumes("application/xml")
     @Path("createspin/")
-    public JAXBElement<WebServerTransferObject> postCreateSpin(JAXBElement<WebServerTransferObject> arg0) {
+    public JAXBElement<Server_client.WebServerTransferObject> postCreateSpin(JAXBElement<Server_client.WebServerTransferObject> arg0) {
         try {
             // Call Web Service Operation
             if (port != null) {
@@ -133,7 +109,7 @@ public class ServerControllerPort {
     @Produces("application/xml")
     @Consumes("application/xml")
     @Path("randomizemathvalues/")
-    public JAXBElement<WebServerTransferObject> postRandomizeMathValues(JAXBElement<WebServerTransferObject> arg0) {
+    public JAXBElement<Server_client.WebServerTransferObject> postRandomizeMathValues(JAXBElement<Server_client.WebServerTransferObject> arg0) {
         try {
             // Call Web Service Operation
             if (port != null) {
@@ -155,7 +131,7 @@ public class ServerControllerPort {
     @Produces("application/xml")
     @Consumes("application/xml")
     @Path("getpositions/")
-    public JAXBElement<WebServerTransferObject> postGetPositions(JAXBElement<WebServerTransferObject> arg0) {
+    public JAXBElement<Server_client.WebServerTransferObject> postGetPositions(JAXBElement<Server_client.WebServerTransferObject> arg0) {
         try {
             // Call Web Service Operation
             if (port != null) {
@@ -177,7 +153,7 @@ public class ServerControllerPort {
     @Produces("application/xml")
     @Consumes("application/xml")
     @Path("updateuser/")
-    public JAXBElement<WebServerTransferObject> postUpdateUser(JAXBElement<WebServerTransferObject> arg0) {
+    public JAXBElement<Server_client.WebServerTransferObject> postUpdateUser(JAXBElement<Server_client.WebServerTransferObject> arg0) {
         try {
             // Call Web Service Operation
             if (port != null) {
@@ -191,9 +167,53 @@ public class ServerControllerPort {
     }
 
     /**
+     * Invokes the SOAP method createGame
+     * @param arg0 resource URI parameter
+     * @return an instance of javax.xml.bind.JAXBElement<Server_client.WebServerTransferObject>
+     */
+    @POST
+    @Produces("application/xml")
+    @Consumes("application/xml")
+    @Path("creategame/")
+    public JAXBElement<Server_client.WebServerTransferObject> postCreateGame(JAXBElement<Server_client.WebServerTransferObject> arg0) {
+        try {
+            // Call Web Service Operation
+            if (port != null) {
+                Server_client.WebServerTransferObject result = port.createGame(arg0.getValue());
+                return new JAXBElement<Server_client.WebServerTransferObject>(new QName("http//Server_client/", "webservertransferobject"), Server_client.WebServerTransferObject.class, result);
+            }
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
+        }
+        return null;
+    }
+
+    /**
+     * Invokes the SOAP method createSpinLinePayouts
+     * @param arg0 resource URI parameter
+     * @return an instance of javax.xml.bind.JAXBElement<Server_client.WebServerTransferObject>
+     */
+    @POST
+    @Produces("application/xml")
+    @Consumes("application/xml")
+    @Path("createspinlinepayouts/")
+    public JAXBElement<Server_client.WebServerTransferObject> postCreateSpinLinePayouts(JAXBElement<Server_client.WebServerTransferObject> arg0) {
+        try {
+            // Call Web Service Operation
+            if (port != null) {
+                Server_client.WebServerTransferObject result = port.createSpinLinePayouts(arg0.getValue());
+                return new JAXBElement<Server_client.WebServerTransferObject>(new QName("http//Server_client/", "webservertransferobject"), Server_client.WebServerTransferObject.class, result);
+            }
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
+        }
+        return null;
+    }
+
+    /**
      *
      */
-    private ServerController getPort() {
+    private Server_client.ServerController getPort() {
         try {
             // Call Web Service Operation
             Server_client.ServerController_Service service = new Server_client.ServerController_Service();

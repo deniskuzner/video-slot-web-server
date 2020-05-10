@@ -5,11 +5,13 @@
  */
 package VideoSlotLogic;
 
+import Domain.LinePayout;
 import Domain.Position;
 import Domain.SPosition;
 import Domain.Spin;
+import Domain.SpinLinePayout;
 import Domain.Symbol;
-import SO.CreateSpinSO;
+import SO.CreateSpinLinePayoutsSO;
 import Transfer.WebServerTransferObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,9 @@ public class VideoSlotLogic {
     List<Symbol> symbols;
     List<Position> positions;
     List<SPosition> sPositions;
+    List<LinePayout> linePayouts;
     Spin spin;
+    PayoutCalculator payoutCalculator;
 
     public VideoSlotLogic(WebServerTransferObject transferObject) {
         this.transferObject = transferObject;
@@ -52,8 +56,7 @@ public class VideoSlotLogic {
                 SPosition sp = new SPosition();
                 sp.setSymbol(symbols.get(mat[x][y]));
                 sp.setPosition(getPosition(x, y));
-                //sp.setGameId(transferObject.getGameId());
-                sp.setGameId(1);
+                sp.setGameId(transferObject.vratiGame().getId());
                 sPositions.add(sp);
             }
         }
@@ -62,6 +65,14 @@ public class VideoSlotLogic {
 
     Position getPosition(int x, int y) {
         return positions.stream().filter(p -> p.getX() == x && p.getY() == y).findFirst().get();
+    }
+
+    public void createSpinLinePayouts() {
+        payoutCalculator = new FiveLinePayoutCalculator(transferObject);
+        List<SpinLinePayout> spinLinePayouts = payoutCalculator.getSpinLinePayouts();
+        transferObject.spinLinePayouts = spinLinePayouts;
+        transferObject.postaviWin(payoutCalculator.calculateWin());
+        new CreateSpinLinePayoutsSO().createSpinLinePayoutsSO(transferObject);
     }
 
 }

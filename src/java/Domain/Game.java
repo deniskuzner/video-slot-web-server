@@ -5,16 +5,19 @@
  */
 package Domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author User
  */
-public class Game {
+public class Game implements GeneralEntity {
 
     private int id;
     private int userId;
-    //mozda
-    //List<Spin> spins;
 
     public Game() {
     }
@@ -38,6 +41,47 @@ public class Game {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String getAtrValue() {
+        return id + ", " + userId;
+    }
+
+    @Override
+    public String setAtrValue() {
+        return "id=" + id + ", userId=" + userId;
+    }
+
+    @Override
+    public String getClassName() {
+        return "game";
+    }
+
+    @Override
+    public String getWhereCondition() {
+        return "id=" + id;
+    }
+
+    @Override
+    public String getNameByColumn(int column) {
+        String names[] = {"id", "userId"};
+        return names[column];
+    }
+
+    @Override
+    public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
+        return new Game(rs.getInt("id"), rs.getInt("userId"));
+    }
+
+    @Override
+    public List<List<GeneralEntity>> getLists() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public void setPrimaryKey(int id) {
+        this.id = id;
     }
 
 }

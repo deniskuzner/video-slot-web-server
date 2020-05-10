@@ -5,6 +5,7 @@
  */
 package Transfer;
 
+import Domain.Game;
 import Domain.LinePayout;
 import Domain.Position;
 import Domain.SPosition;
@@ -27,9 +28,10 @@ public class WebServerTransferObject implements Serializable {
     public List<LinePayout> linePayouts;
     public List<SPosition> sPositions;
     public List<SpinLinePayout> spinLinePayouts;
-    
+
     public Spin spin;
-    public int gameId;
+    public Game game;
+    public int win;
 
     public String message;
     public boolean signal;
@@ -41,7 +43,7 @@ public class WebServerTransferObject implements Serializable {
     public void postaviUser(User user) {
         this.user = user;
     }
-    
+
     public void postaviSymbols(List<Symbol> symbols) {
         this.symbols = symbols;
     }
@@ -57,21 +59,29 @@ public class WebServerTransferObject implements Serializable {
     public void postaviPositions(List<Position> positions) {
         this.positions = positions;
     }
-    
-    public int vratiGameId() {
-        return gameId;
-    }
-
-    public void postaviGameId(int gameId) {
-        this.gameId = gameId;
-    }
 
     public Spin vratiSpin() {
         return spin;
     }
 
-    public void posatviSpin(Spin spin) {
+    public void postaviSpin(Spin spin) {
         this.spin = spin;
     }
 
+    public Game vratiGame() {
+        return game;
+    }
+
+    public void postaviGame(Game game) {
+        this.game = game;
+    }
+
+    public int vratiWin() {
+        return win;
+    }
+
+    public void postaviWin(int win) {
+        this.win = win;
+    }
+    
 }

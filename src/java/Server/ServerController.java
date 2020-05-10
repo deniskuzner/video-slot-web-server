@@ -5,6 +5,7 @@
  */
 package Server;
 
+import SO.CreateGameSO;
 import SO.CreateSpinSO;
 import SO.GetLinePayoutsSO;
 import SO.GetPositionsSO;
@@ -42,11 +43,6 @@ public class ServerController {
         return transferObject;
     }
 
-    public WebServerTransferObject saveSPositions(WebServerTransferObject transferObject) {
-        new SaveSPositionsSO().saveSPositionsSO(transferObject);
-        return transferObject;
-    }
-
     public WebServerTransferObject updateUser(WebServerTransferObject transferObject) {
         new UpdateUserSO().updateUserSO(transferObject);
         return transferObject;
@@ -54,6 +50,16 @@ public class ServerController {
 
     public WebServerTransferObject createSpin(WebServerTransferObject transferObject) {
         new CreateSpinSO().createSpinSO(transferObject);
+        return transferObject;
+    }
+    
+    public WebServerTransferObject createGame(WebServerTransferObject transferObject) {
+        new CreateGameSO().createGameSO(transferObject);
+        return transferObject;
+    }
+    
+    public WebServerTransferObject createSpinLinePayouts(WebServerTransferObject transferObject) {
+        new VideoSlotLogic(transferObject).createSpinLinePayouts();
         return transferObject;
     }
     

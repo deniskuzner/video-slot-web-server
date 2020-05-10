@@ -7,6 +7,7 @@ package Domain;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,7 +91,7 @@ public class Position implements GeneralEntity {
 
     @Override
     public List<List<GeneralEntity>> getLists() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

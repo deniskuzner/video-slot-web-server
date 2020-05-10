@@ -1,17 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://Server/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ServerController" targetNamespace="http://Server/">
   <wsdl:types>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://jaxb.dev.java.net/array" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://Server/" elementFormDefault="unqualified" targetNamespace="http://Server/" version="1.0">
 
-  <xs:complexType final="#all" name="intArray">
-    <xs:sequence>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="xs:int"/>
-    </xs:sequence>
-  </xs:complexType>
+  <xs:element name="createGame" type="tns:createGame"/>
 
-</xs:schema>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://Server/" xmlns:ns1="http://jaxb.dev.java.net/array" elementFormDefault="unqualified" targetNamespace="http://Server/" version="1.0">
-
-  <xs:import namespace="http://jaxb.dev.java.net/array"/>
+  <xs:element name="createGameResponse" type="tns:createGameResponse"/>
 
   <xs:element name="createSpin" type="tns:createSpin"/>
 
@@ -33,10 +26,6 @@
 
   <xs:element name="randomizeMathValuesResponse" type="tns:randomizeMathValuesResponse"/>
 
-  <xs:element name="saveSPositions" type="tns:saveSPositions"/>
-
-  <xs:element name="saveSPositionsResponse" type="tns:saveSPositionsResponse"/>
-
   <xs:element name="updateUser" type="tns:updateUser"/>
 
   <xs:element name="updateUserResponse" type="tns:updateUserResponse"/>
@@ -56,15 +45,9 @@
       <xs:element maxOccurs="unbounded" minOccurs="0" name="sPositions" nillable="true" type="tns:sPosition"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="spinLinePayouts" nillable="true" type="tns:spinLinePayout"/>
       <xs:element minOccurs="0" name="spin" type="tns:spin"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="mat" nillable="true" type="ns1:intArray"/>
-      <xs:element name="gameId" type="xs:int"/>
+      <xs:element minOccurs="0" name="game" type="tns:game"/>
       <xs:element minOccurs="0" name="message" type="xs:string"/>
       <xs:element name="signal" type="xs:boolean"/>
-      <xs:element name="gameIdProperty" type="xs:int"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="positionsList" nillable="true" type="tns:position"/>
-      <xs:element minOccurs="0" name="spinObject" type="tns:spin"/>
-      <xs:element maxOccurs="unbounded" minOccurs="0" name="symbolsList" nillable="true" type="tns:symbol"/>
-      <xs:element minOccurs="0" name="userObject" type="tns:user"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -109,9 +92,9 @@
     <xs:sequence>
       <xs:element name="gameId" type="xs:int"/>
       <xs:element name="id" type="xs:int"/>
-      <xs:element name="positionId" type="xs:int"/>
+      <xs:element minOccurs="0" name="position" type="tns:position"/>
       <xs:element name="spinId" type="xs:int"/>
-      <xs:element name="symbolId" type="xs:int"/>
+      <xs:element minOccurs="0" name="symbol" type="tns:symbol"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -130,6 +113,13 @@
       <xs:element name="id" type="xs:int"/>
       <xs:element name="win" type="xs:int"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="sPositions" nillable="true" type="tns:sPosition"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="game">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element name="userId" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -158,18 +148,6 @@
   </xs:complexType>
 
   <xs:complexType name="createSpinResponse">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="tns:webServerTransferObject"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="saveSPositions">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="arg0" type="tns:webServerTransferObject"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="saveSPositionsResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:webServerTransferObject"/>
     </xs:sequence>
@@ -211,22 +189,30 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="createGame">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:webServerTransferObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createGameResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:webServerTransferObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
 </xs:schema>
   </wsdl:types>
-  <wsdl:message name="saveSPositions">
-    <wsdl:part element="tns:saveSPositions" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="createSpinResponse">
     <wsdl:part element="tns:createSpinResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="saveSPositionsResponse">
-    <wsdl:part element="tns:saveSPositionsResponse" name="parameters">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="updateUserResponse">
     <wsdl:part element="tns:updateUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createGameResponse">
+    <wsdl:part element="tns:createGameResponse" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getPositions">
@@ -235,6 +221,10 @@
   </wsdl:message>
   <wsdl:message name="getLinePayoutsResponse">
     <wsdl:part element="tns:getLinePayoutsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createGame">
+    <wsdl:part element="tns:createGame" name="parameters">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getSymbols">
@@ -288,12 +278,6 @@
       <wsdl:output message="tns:createSpinResponse" name="createSpinResponse">
     </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="saveSPositions">
-      <wsdl:input message="tns:saveSPositions" name="saveSPositions">
-    </wsdl:input>
-      <wsdl:output message="tns:saveSPositionsResponse" name="saveSPositionsResponse">
-    </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="randomizeMathValues">
       <wsdl:input message="tns:randomizeMathValues" name="randomizeMathValues">
     </wsdl:input>
@@ -310,6 +294,12 @@
       <wsdl:input message="tns:updateUser" name="updateUser">
     </wsdl:input>
       <wsdl:output message="tns:updateUserResponse" name="updateUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createGame">
+      <wsdl:input message="tns:createGame" name="createGame">
+    </wsdl:input>
+      <wsdl:output message="tns:createGameResponse" name="createGameResponse">
     </wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
@@ -330,15 +320,6 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="getLinePayoutsResponse">
-        <soap:body use="literal"/>
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="saveSPositions">
-      <soap:operation soapAction="" style="document"/>
-      <wsdl:input name="saveSPositions">
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="saveSPositionsResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -375,6 +356,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="updateUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createGame">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createGame">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createGameResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

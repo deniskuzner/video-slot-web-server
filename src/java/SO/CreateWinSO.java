@@ -5,31 +5,31 @@
  */
 package SO;
 
-import Domain.Game;
+import Domain.Win;
 import Transfer.WebServerTransferObject;
 
 /**
  *
  * @author User
  */
-public class CreateGameSO extends AbstractGenericSO {
-    
+public class CreateWinSO extends AbstractGenericSO {
+
     WebServerTransferObject transferObject;
-    
-    public boolean createGameSO(WebServerTransferObject transferObject) {
+
+    public boolean createWinSO(WebServerTransferObject transferObject) {
         this.transferObject = transferObject;
         return templateExecuteSO();
     }
 
     @Override
     public boolean executeSO() {
-        Game game = transferObject.getGameObject();
-        if(!databaseBroker.insertCompositeRecord(game)) {
+        Win win = transferObject.getWinObject();
+        if (!databaseBroker.insertRecord(win)) {
             transferObject.signal = false;
             return false;
         }
         transferObject.signal = true;
         return true;
     }
-    
+
 }

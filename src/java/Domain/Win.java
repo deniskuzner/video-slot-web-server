@@ -9,27 +9,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  *
  * @author User
  */
-public class Spin implements GeneralEntity {
+public class Win implements GeneralEntity {
 
     private int id;
     private int gameId;
-    private int bet;
-    private List<SPosition> sPositions;
+    private int spinId;
+    private int amount;
 
-    public Spin() {
+    public Win() {
     }
 
-    public Spin(int id, int gameId, int bet, List<SPosition> sPositions) {
+    public Win(int id, int gameId, int spinId, int amount) {
         this.id = id;
         this.gameId = gameId;
-        this.bet = bet;
-        this.sPositions = sPositions;
+        this.spinId = spinId;
+        this.amount = amount;
     }
 
     public int getId() {
@@ -48,35 +47,35 @@ public class Spin implements GeneralEntity {
         this.gameId = gameId;
     }
 
-    public int getBet() {
-        return bet;
+    public int getSpinId() {
+        return spinId;
     }
 
-    public void setBet(int bet) {
-        this.bet = bet;
+    public void setSpinId(int spinId) {
+        this.spinId = spinId;
     }
 
-    public List<SPosition> getsPositions() {
-        return sPositions;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setsPositions(List<SPosition> sPositions) {
-        this.sPositions = sPositions;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @Override
     public String getAtrValue() {
-        return id + ", " + gameId + ", " + bet;
+        return id + ", " + gameId + ", " + spinId + ", " + amount;
     }
 
     @Override
     public String setAtrValue() {
-        return "id=" + id + ", gameId=" + gameId + ", bet=" + bet;
+        return "id=" + id + ", gameId=" + gameId + ", spinId=" + spinId + ", amount=" + amount;
     }
 
     @Override
     public String getClassName() {
-        return "spin";
+        return "win";
     }
 
     @Override
@@ -86,20 +85,18 @@ public class Spin implements GeneralEntity {
 
     @Override
     public String getNameByColumn(int column) {
-        String names[] = {"id", "gameId", "bet"};
+        String names[] = {"id", "gameId", "spinId", "amount"};
         return names[column];
     }
 
     @Override
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
-        return new Spin(rs.getInt("id"), rs.getInt("gameId"), rs.getInt("bet"), null);
+        return new Win(rs.getInt("id"), rs.getInt("gameId"), rs.getInt("spinId"), rs.getInt("amount"));
     }
 
     @Override
     public List<List<GeneralEntity>> getLists() {
-        List<List<GeneralEntity>> result = new ArrayList<>();
-        result.add(sPositions.stream().map(sp -> (GeneralEntity) sp).collect(Collectors.toList()));
-        return result;
+        return new ArrayList<>();
     }
 
     @Override

@@ -6,12 +6,7 @@
 package Server;
 
 import SO.CreateGameSO;
-import SO.CreateSpinSO;
-import SO.GetLinePayoutsSO;
-import SO.GetPositionsSO;
 import SO.GetSymbolsSO;
-import SO.SaveSPositionsSO;
-import SO.UpdateUserSO;
 import Transfer.WebServerTransferObject;
 import VideoSlotLogic.VideoSlotLogic;
 import javax.jws.WebService;
@@ -28,38 +23,18 @@ public class ServerController {
         return transferObject;
     }
 
-    public WebServerTransferObject getPositions(WebServerTransferObject transferObject) {
-        new GetPositionsSO().getPositionsSO(transferObject);
-        return transferObject;
-    }
-
-    public WebServerTransferObject getLinePayouts(WebServerTransferObject transferObject) {
-        new GetLinePayoutsSO().getLinePayoutsSO(transferObject);
-        return transferObject;
-    }
-
     public WebServerTransferObject randomizeMathValues(WebServerTransferObject transferObject) {
         new VideoSlotLogic(transferObject).randomizeMatValues();
         return transferObject;
     }
 
-    public WebServerTransferObject updateUser(WebServerTransferObject transferObject) {
-        new UpdateUserSO().updateUserSO(transferObject);
-        return transferObject;
-    }
-
-    public WebServerTransferObject createSpin(WebServerTransferObject transferObject) {
-        new CreateSpinSO().createSpinSO(transferObject);
-        return transferObject;
-    }
-    
     public WebServerTransferObject createGame(WebServerTransferObject transferObject) {
         new CreateGameSO().createGameSO(transferObject);
         return transferObject;
     }
     
-    public WebServerTransferObject createSpinLinePayouts(WebServerTransferObject transferObject) {
-        new VideoSlotLogic(transferObject).createSpinLinePayouts();
+    public WebServerTransferObject executeSpin(WebServerTransferObject transferObject) {
+        new VideoSlotLogic(transferObject).executeSpin();
         return transferObject;
     }
     

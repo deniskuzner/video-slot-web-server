@@ -13,6 +13,7 @@ import Domain.Spin;
 import Domain.SpinLinePayout;
 import Domain.Symbol;
 import Domain.User;
+import Domain.Win;
 import java.io.Serializable;
 import java.util.List;
 
@@ -31,57 +32,57 @@ public class WebServerTransferObject implements Serializable {
 
     public Spin spin;
     public Game game;
-    public int win;
+    public Win win;
 
     public String message;
     public boolean signal;
 
-    public User vratiUser() {
+    public User getUserObject() {
         return user;
     }
 
-    public void postaviUser(User user) {
+    public void setUserObject(User user) {
         this.user = user;
     }
 
-    public void postaviSymbols(List<Symbol> symbols) {
-        this.symbols = symbols;
-    }
-
-    public List<Symbol> vratiSymbols() {
+    public List<Symbol> getSymbolsList() {
         return symbols;
     }
 
-    public List<Position> vratiPositions() {
+    public void setSymbolsList(List<Symbol> symbols) {
+        this.symbols = symbols;
+    }
+
+    public List<Position> getPositionsList() {
         return positions;
     }
 
-    public void postaviPositions(List<Position> positions) {
+    public void setPositionsList(List<Position> positions) {
         this.positions = positions;
     }
 
-    public Spin vratiSpin() {
+    public Spin getSpinObject() {
         return spin;
     }
 
-    public void postaviSpin(Spin spin) {
+    public void setSpinObject(Spin spin) {
         this.spin = spin;
     }
 
-    public Game vratiGame() {
+    public Game getGameObject() {
         return game;
     }
 
-    public void postaviGame(Game game) {
+    public void setGameObject(Game game) {
         this.game = game;
     }
 
-    public int vratiWin() {
+    public Win getWinObject() {
         return win;
     }
 
-    public void postaviWin(int win) {
+    public void setWinObject(Win win) {
         this.win = win;
     }
-    
+
 }

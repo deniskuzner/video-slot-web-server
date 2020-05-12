@@ -23,7 +23,7 @@ public class CreateSpinSO extends AbstractGenericSO {
 
     @Override
     public boolean executeSO() {
-        Spin spin = transferObject.vratiSpin();
+        Spin spin = transferObject.getSpinObject();
         if (!databaseBroker.insertCompositeRecord(spin)) {
                 transferObject.signal = false;
                 return false;

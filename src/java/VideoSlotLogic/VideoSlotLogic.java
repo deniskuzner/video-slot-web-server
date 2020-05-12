@@ -16,6 +16,7 @@ import Domain.Win;
 import SO.CreateSpinLinePayoutsSO;
 import SO.CreateSpinSO;
 import SO.CreateWinSO;
+import SO.ExecuteSpinSO;
 import SO.GetLinePayoutsSO;
 import SO.GetPositionsSO;
 import SO.GetSymbolsSO;
@@ -56,18 +57,13 @@ public class VideoSlotLogic {
 
     public void executeSpin() {
         randomizeMatValues();
-        if (!createSpin()) {
-            return;
-        }
+        createSpin();
         if (!reduceUserBalance()) {
             return;
         }
-        if (!createSpinLinePayouts()) {
-            return;
-        }
-        
+        createSpinLinePayouts();
         createWin();
-        increaseUserBalance();
+        new ExecuteSpinSO().executeSpinSO(transferObject);
     }
 
     public void randomizeMatValues() {
@@ -96,25 +92,22 @@ public class VideoSlotLogic {
         return positions.stream().filter(p -> p.getX() == x && p.getY() == y).findFirst().get();
     }
 
-    private boolean createSpin() {
+    private void createSpin() {
         spin.setsPositions(sPositions);
-        return new CreateSpinSO().createSpinSO(transferObject);
     }
 
-    private boolean createSpinLinePayouts() {
+    private void createSpinLinePayouts() {
         payoutCalculator = new FiveLinePayoutCalculator(transferObject);
         List<SpinLinePayout> spinLinePayouts = payoutCalculator.getSpinLinePayouts();
         transferObject.spinLinePayouts = spinLinePayouts;
-        return new CreateSpinLinePayoutsSO().createSpinLinePayoutsSO(transferObject);
     }
     
-    private boolean createWin() {
+    private void createWin() {
         int winAmount = payoutCalculator.calculateWin();
         this.win.setGameId(spin.getGameId());
         this.win.setSpinId(spin.getId());
         this.win.setAmount(winAmount);
         transferObject.setWinObject(win);
-        return new CreateWinSO().createWinSO(transferObject);
     }
 
     private boolean reduceUserBalance() {
@@ -124,16 +117,7 @@ public class VideoSlotLogic {
             return false;
         }
         user.setBalance(newBalance);
-        new UpdateUserSO().updateUserSO(transferObject);
-
-        return transferObject.signal;
-    }
-
-    private void increaseUserBalance() {
-        if (win.getAmount() > 0) {
-            user.setBalance(user.getBalance() + win.getAmount());
-            new UpdateUserSO().updateUserSO(transferObject);
-        }
+        return true;
     }
 
     private void getSymbols() {

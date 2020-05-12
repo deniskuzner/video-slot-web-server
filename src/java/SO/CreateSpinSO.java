@@ -13,9 +13,9 @@ import Transfer.WebServerTransferObject;
  * @author User
  */
 public class CreateSpinSO extends AbstractGenericSO {
-    
+
     WebServerTransferObject transferObject;
-    
+
     public boolean createSpinSO(WebServerTransferObject transferObject) {
         this.transferObject = transferObject;
         return templateExecuteSO();
@@ -25,11 +25,11 @@ public class CreateSpinSO extends AbstractGenericSO {
     public boolean executeSO() {
         Spin spin = transferObject.getSpinObject();
         if (!databaseBroker.insertCompositeRecord(spin)) {
-                transferObject.signal = false;
-                return false;
-            }
+            transferObject.signal = false;
+            return false;
+        }
         transferObject.signal = true;
         return true;
     }
-    
+
 }

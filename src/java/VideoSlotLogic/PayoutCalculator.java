@@ -57,7 +57,7 @@ public abstract class PayoutCalculator {
         return win;
     }
     
-    public void addSpinLinePayoutToList(List<SpinLinePayout> spinLinePayouts, int arrayLength, int symbolId, int lineNumber) {
+    public void addSpinLinePayoutToList(int arrayLength, int symbolId, int lineNumber) {
         Optional<LinePayout> result = linePayouts.stream().filter(l -> l.getArrayLength() == arrayLength && l.getSymbolId() == symbolId).findFirst();
         LinePayout lp = result.isPresent() ? result.get() : null;
 

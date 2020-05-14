@@ -33,7 +33,7 @@ public class FiveLinePayoutCalculator extends PayoutCalculator {
                 }
             }
 
-            addSpinLinePayoutToList(spinLinePayouts, arrayLength, symbolId, x + 1);
+            addSpinLinePayoutToList(arrayLength, symbolId, x + 1);
         }
 
         //line 4
@@ -52,7 +52,7 @@ public class FiveLinePayoutCalculator extends PayoutCalculator {
                 x--;
             }
         }
-        addSpinLinePayoutToList(spinLinePayouts, arrayLength, symbolId, 4);
+        addSpinLinePayoutToList(arrayLength, symbolId, 4);
 
         //line 5
         arrayLength = 0;
@@ -70,7 +70,7 @@ public class FiveLinePayoutCalculator extends PayoutCalculator {
                 x++;
             }
         }
-        addSpinLinePayoutToList(spinLinePayouts, arrayLength, symbolId, 5);
+        addSpinLinePayoutToList(arrayLength, symbolId, 5);
 
         return spinLinePayouts;
     }

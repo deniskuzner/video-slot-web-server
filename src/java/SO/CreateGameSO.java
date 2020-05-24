@@ -7,6 +7,8 @@ package SO;
 
 import Domain.Game;
 import Transfer.WebServerTransferObject;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -24,6 +26,8 @@ public class CreateGameSO extends AbstractGenericSO {
     @Override
     public boolean executeSO() {
         Game game = transferObject.getGameObject();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        game.setCreatedOn(java.sql.Date.valueOf(sdf.format(new Date())));
         if(!databaseBroker.insertCompositeRecord(game)) {
             transferObject.signal = false;
             return false;

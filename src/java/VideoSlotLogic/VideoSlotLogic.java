@@ -13,6 +13,13 @@ import Domain.SpinLinePayout;
 import Domain.Symbol;
 import Domain.User;
 import Domain.Win;
+import PayoutCalculator.ConcretePayoutCalculator;
+import PayoutCalculator.LineFive;
+import PayoutCalculator.LineFour;
+import PayoutCalculator.LineOne;
+import PayoutCalculator.LineThree;
+import PayoutCalculator.LineTwo;
+import PayoutCalculator.PayoutCalculator;
 import SO.ExecuteSpinSO;
 import SO.GetLinePayoutsSO;
 import SO.GetPositionsSO;
@@ -35,6 +42,7 @@ public class VideoSlotLogic {
     List<Position> positions;
     List<SPosition> sPositions;
     List<LinePayout> linePayouts;
+    List<SpinLinePayout> spinLinePayouts;
     Spin spin;
     PayoutCalculator payoutCalculator;
     Win win;
@@ -48,6 +56,7 @@ public class VideoSlotLogic {
         getPositions();
         getLinePayouts();
         this.sPositions = new ArrayList<>();
+        this.spinLinePayouts = new ArrayList<>();
         this.win = new Win();
     }
 
@@ -93,13 +102,13 @@ public class VideoSlotLogic {
     }
 
     private void createSpinLinePayouts() {
-        payoutCalculator = new FiveLinePayoutCalculator(transferObject);
-        List<SpinLinePayout> spinLinePayouts = payoutCalculator.getSpinLinePayouts();
+        payoutCalculator = new LineFive(new LineFour(new LineThree(new LineTwo(new LineOne(new ConcretePayoutCalculator(transferObject))))));
+        spinLinePayouts = payoutCalculator.getSpinLinePayouts();
         transferObject.spinLinePayouts = spinLinePayouts;
     }
     
     private void createWin() {
-        int winAmount = payoutCalculator.calculateWin();
+        int winAmount = payoutCalculator.calculateWin(spinLinePayouts);
         this.win.setGameId(spin.getGameId());
         this.win.setSpinId(spin.getId());
         this.win.setAmount(winAmount);

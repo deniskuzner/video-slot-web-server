@@ -22,6 +22,7 @@ public interface GeneralEntity extends Serializable {
     String getWhereCondition();
     String getNameByColumn(int column);
     GeneralEntity getNewRecord(ResultSet rs) throws SQLException;
+    List<GeneralEntity> getEntities();
     List<List<GeneralEntity>> getLists();
     void setPrimaryKey(int id);
 

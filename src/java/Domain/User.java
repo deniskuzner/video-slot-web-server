@@ -136,6 +136,11 @@ public class User implements GeneralEntity {
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
         return new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getDate("birthDate"), rs.getInt("balance"));
     }
+    
+    @Override
+    public List<GeneralEntity> getEntities() {
+        return new ArrayList<>();
+    }
 
     @Override
     public List<List<GeneralEntity>> getLists() {

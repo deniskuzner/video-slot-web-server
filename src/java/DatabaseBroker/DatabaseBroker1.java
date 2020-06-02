@@ -62,6 +62,14 @@ public class DatabaseBroker1 extends DatabaseBroker {
                 generalEntity.setPrimaryKey(id);
                 signal = true;
             }
+            
+            List<GeneralEntity> entities = generalEntity.getEntities();
+            for (GeneralEntity entity : entities) {
+                entity.setPrimaryKey(id);
+                query = "INSERT INTO " + entity.getClassName() + " VALUES (" + entity.getAtrValue() + ")";
+                    if(!executeUpdate(query))
+                        signal = false;
+            }
 
             List<List<GeneralEntity>> lists = generalEntity.getLists();
             for (List<GeneralEntity> list : lists) {

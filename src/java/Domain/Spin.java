@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -20,16 +19,20 @@ public class Spin implements GeneralEntity {
     private int id;
     private int gameId;
     private int bet;
+    private Win win;
     private List<SPosition> sPositions;
+    private List<SpinLinePayout> spinLinePayouts;
 
     public Spin() {
     }
 
-    public Spin(int id, int gameId, int bet, List<SPosition> sPositions) {
+    public Spin(int id, int gameId, int bet, Win win, List<SPosition> sPositions, List<SpinLinePayout> spinLinePayouts) {
         this.id = id;
         this.gameId = gameId;
         this.bet = bet;
+        this.win = win;
         this.sPositions = sPositions;
+        this.spinLinePayouts = spinLinePayouts;
     }
 
     public int getId() {
@@ -56,6 +59,14 @@ public class Spin implements GeneralEntity {
         this.bet = bet;
     }
 
+    public Win getWin() {
+        return win;
+    }
+
+    public void setWin(Win win) {
+        this.win = win;
+    }
+    
     public List<SPosition> getsPositions() {
         return sPositions;
     }
@@ -64,6 +75,14 @@ public class Spin implements GeneralEntity {
         this.sPositions = sPositions;
     }
 
+    public List<SpinLinePayout> getSpinLinePayouts() {
+        return spinLinePayouts;
+    }
+
+    public void setSpinLinePayouts(List<SpinLinePayout> spinLinePayouts) {
+        this.spinLinePayouts = spinLinePayouts;
+    }
+    
     @Override
     public String getAtrValue() {
         return id + ", " + gameId + ", " + bet;
@@ -92,13 +111,21 @@ public class Spin implements GeneralEntity {
 
     @Override
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
-        return new Spin(rs.getInt("id"), rs.getInt("gameId"), rs.getInt("bet"), null);
+        return new Spin(rs.getInt("id"), rs.getInt("gameId"), rs.getInt("bet"), null, null, null);
+    }
+    
+    @Override
+    public List<GeneralEntity> getEntities() {
+        List<GeneralEntity> result = new ArrayList<>();
+        result.add(win);
+        return result;
     }
 
     @Override
     public List<List<GeneralEntity>> getLists() {
         List<List<GeneralEntity>> result = new ArrayList<>();
-        result.add(sPositions.stream().map(sp -> (GeneralEntity) sp).collect(Collectors.toList()));
+        result.add(new ArrayList<>(sPositions));
+        result.add(new ArrayList<>(spinLinePayouts));
         return result;
     }
 

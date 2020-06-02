@@ -84,6 +84,11 @@ public class Game implements GeneralEntity {
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
         return new Game(rs.getInt("id"), rs.getInt("userId"), rs.getDate("createdOn"));
     }
+    
+    @Override
+    public List<GeneralEntity> getEntities() {
+        return new ArrayList<>();
+    }
 
     @Override
     public List<List<GeneralEntity>> getLists() {

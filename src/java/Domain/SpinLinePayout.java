@@ -95,13 +95,18 @@ public class SpinLinePayout implements GeneralEntity {
     }
 
     @Override
+    public List<GeneralEntity> getEntities() {
+        return new ArrayList<>();
+    }
+    
+    @Override
     public List<List<GeneralEntity>> getLists() {
         return new ArrayList<>();
     }
 
     @Override
     public void setPrimaryKey(int id) {
-        this.gameId = id;
+        this.spinId = id;
     }
 
 }

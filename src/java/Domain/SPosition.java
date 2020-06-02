@@ -103,6 +103,11 @@ public class SPosition implements GeneralEntity {
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
         return new SPosition(rs.getInt("id"), rs.getInt("gameId"), rs.getInt("spinId"), new Position(rs.getInt("positionId"), 0, 0), new Symbol(rs.getInt("symbolId"), ""));
     }
+    
+    @Override
+    public List<GeneralEntity> getEntities() {
+        return new ArrayList<>();
+    }
 
     @Override
     public List<List<GeneralEntity>> getLists() {

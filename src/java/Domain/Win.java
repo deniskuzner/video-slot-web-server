@@ -93,6 +93,11 @@ public class Win implements GeneralEntity {
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
         return new Win(rs.getInt("id"), rs.getInt("gameId"), rs.getInt("spinId"), rs.getInt("amount"));
     }
+    
+    @Override
+    public List<GeneralEntity> getEntities() {
+        return new ArrayList<>();
+    }
 
     @Override
     public List<List<GeneralEntity>> getLists() {
@@ -101,7 +106,7 @@ public class Win implements GeneralEntity {
 
     @Override
     public void setPrimaryKey(int id) {
-        this.id = id;
+        this.spinId = id;
     }
 
 }

@@ -88,6 +88,11 @@ public class Position implements GeneralEntity {
     public GeneralEntity getNewRecord(ResultSet rs) throws SQLException {
         return new Position(rs.getInt("id"), rs.getInt("x"), rs.getInt("y"));
     }
+    
+    @Override
+    public List<GeneralEntity> getEntities() {
+        return new ArrayList<>();
+    }
 
     @Override
     public List<List<GeneralEntity>> getLists() {

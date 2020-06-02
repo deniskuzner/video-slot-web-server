@@ -105,14 +105,15 @@ public class VideoSlotLogic {
         payoutCalculator = new LineFive(new LineFour(new LineThree(new LineTwo(new LineOne(new ConcretePayoutCalculator(transferObject))))));
         spinLinePayouts = payoutCalculator.getSpinLinePayouts();
         transferObject.spinLinePayouts = spinLinePayouts;
+        spin.setSpinLinePayouts(spinLinePayouts);
     }
     
     private void createWin() {
         int winAmount = payoutCalculator.calculateWin(spinLinePayouts);
         this.win.setGameId(spin.getGameId());
-        this.win.setSpinId(spin.getId());
         this.win.setAmount(winAmount);
         transferObject.setWinObject(win);
+        spin.setWin(win);
     }
 
     private boolean reduceUserBalance() {

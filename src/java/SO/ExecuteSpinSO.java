@@ -45,23 +45,7 @@ public class ExecuteSpinSO extends AbstractGenericSO {
             }
         }
 
-        List<SpinLinePayout> spinLinePayouts = transferObject.spinLinePayouts;
-        for (SpinLinePayout spinLinePayout : spinLinePayouts) {
-            spinLinePayout.setSpinId(spin.getId());
-            if (!databaseBroker.insertRecord(spinLinePayout)) {
-                transferObject.signal = false;
-                return false;
-            }
-        }
-
-        Win win = transferObject.getWinObject();
-        win.setSpinId(spin.getId());
-        if (!databaseBroker.insertRecord(win)) {
-            transferObject.signal = false;
-            return false;
-        }
-
-        user.setBalance(user.getBalance() + win.getAmount());
+        user.setBalance(user.getBalance() + spin.getWin().getAmount());
         if (!databaseBroker.updateRecord(user)) {
             transferObject.signal = false;
             return false;

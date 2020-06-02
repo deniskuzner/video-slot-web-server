@@ -95,6 +95,11 @@ public class LinePayout implements GeneralEntity {
     }
 
     @Override
+    public List<GeneralEntity> getEntities() {
+        return new ArrayList<>();
+    }
+    
+    @Override
     public List<List<GeneralEntity>> getLists() {
         return new ArrayList<>();
     }

@@ -27,12 +27,6 @@ public class ExecuteSpinSO extends AbstractGenericSO {
 
     @Override
     public boolean executeSO() {
-        Spin spin = transferObject.getSpinObject();
-        if (!databaseBroker.insertCompositeRecord(spin)) {
-            transferObject.signal = false;
-            return false;
-        }
-
         User user = (User) databaseBroker.findRecord(transferObject.user);
         if (user == null) {
             transferObject.signal = false;
@@ -43,6 +37,12 @@ public class ExecuteSpinSO extends AbstractGenericSO {
                 transferObject.signal = false;
                 return false;
             }
+        }
+        
+        Spin spin = transferObject.getSpinObject();
+        if (!databaseBroker.insertCompositeRecord(spin)) {
+            transferObject.signal = false;
+            return false;
         }
 
         user.setBalance(user.getBalance() + spin.getWin().getAmount());

@@ -112,7 +112,6 @@ public class VideoSlotLogic {
         int winAmount = payoutCalculator.calculateWin(spinLinePayouts);
         this.win.setGameId(spin.getGameId());
         this.win.setAmount(winAmount);
-        transferObject.setWinObject(win);
         spin.setWin(win);
     }
 

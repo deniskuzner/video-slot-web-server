@@ -34,7 +34,6 @@
       <xs:element maxOccurs="unbounded" minOccurs="0" name="spinLinePayouts" nillable="true" type="tns:spinLinePayout"/>
       <xs:element minOccurs="0" name="spin" type="tns:spin"/>
       <xs:element minOccurs="0" name="game" type="tns:game"/>
-      <xs:element minOccurs="0" name="win" type="tns:win"/>
       <xs:element minOccurs="0" name="message" type="xs:string"/>
       <xs:element name="signal" type="xs:boolean"/>
       <xs:element minOccurs="0" name="gameObject" type="tns:game"/>
@@ -42,7 +41,6 @@
       <xs:element minOccurs="0" name="spinObject" type="tns:spin"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="symbolsList" nillable="true" type="tns:symbol"/>
       <xs:element minOccurs="0" name="userObject" type="tns:user"/>
-      <xs:element minOccurs="0" name="winObject" type="tns:win"/>
     </xs:sequence>
   </xs:complexType>
 

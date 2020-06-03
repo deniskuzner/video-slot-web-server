@@ -13,7 +13,6 @@ import Domain.Spin;
 import Domain.SpinLinePayout;
 import Domain.Symbol;
 import Domain.User;
-import Domain.Win;
 import java.io.Serializable;
 import java.util.List;
 
@@ -32,7 +31,6 @@ public class WebServerTransferObject implements Serializable {
 
     public Spin spin;
     public Game game;
-    public Win win;
 
     public String message;
     public boolean signal;
@@ -75,14 +73,6 @@ public class WebServerTransferObject implements Serializable {
 
     public void setGameObject(Game game) {
         this.game = game;
-    }
-
-    public Win getWinObject() {
-        return win;
-    }
-
-    public void setWinObject(Win win) {
-        this.win = win;
     }
 
 }
